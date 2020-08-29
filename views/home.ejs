@@ -32,14 +32,18 @@
           <%subjectList.forEach(function(subject){ %>
             <tr>
               <td><form action="/present" method="post">
-                <button type="submit" name="button" value="button1">Click</button>
+                <button type="submit" name="button" value=<%=subject._id%>>Click</button>
               </form></td>
               <td><form action="/absent" method="post">
-                <button type="submit" name="button" value="button2">Click</button>
+                <button type="submit" name="button" value=<%=subject._id%>>Click</button>
               </form></td>
               <td><%=subject.subjectName%></td>
               <td><%=subject.present%>/<%=subject.total%></td>
-              <td><%=(subject.present/subject.total)*100%>%</td>
+              <%if(subject.total != 0){ %>
+                <td><%=(subject.present/subject.total)*100%>%</td>
+              <% }else{ %>
+                 <td>None</td>
+              <% } %>
             </tr>
           <% }); %>
         </tbody>

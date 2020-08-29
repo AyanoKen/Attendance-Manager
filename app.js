@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 
-mongoose.connect('mongodb://localhost:27017/AttendanceManager', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/AttendanceManager', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const subjectsSchema = {
   subjectName: String,
@@ -38,8 +38,35 @@ app.get("/", function(req, res){
   });
 });
 
-app.post("/", function(req, res){
-  console.log(req.body.button)
+app.post("/present", function(req, res){
+  let subjectID = req.body.button;
+
+  Subject.findById(subjectID, function(err, result){
+    if(err){
+      console.log(err);
+    }else{
+      result.present += 1;
+      result.total += 1;
+
+      result.save();
+      res.redirect("/");
+    }
+  });
+});
+
+app.post("/absent", function(req, res){
+  let subjectID = req.body.button;
+
+  Subject.findById(subjectID, function(err, result){
+    if(err){
+      console.log(err);
+    }else{
+      result.total += 1;
+
+      result.save();
+      res.redirect("/");
+    }
+  });
 });
 
 app.listen(3000, function(){
