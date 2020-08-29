@@ -38,6 +38,31 @@ app.get("/", function(req, res){
   });
 });
 
+app.get("/addSubject", function(req, res){
+  res.render("form");
+});
+
+app.post("/addSubject", function(req, res){
+  const newSubject = new Subject({
+    subjectName: req.body.subjectName,
+    present: 0,
+    total: 0
+  });
+
+  newSubject.save();
+  res.redirect("/");
+});
+
+app.post("/deleteSubject", function(req, res){
+  Subject.deleteOne({subjectName: req.body.subject}, function(err){
+    if(err){
+      console.log(err);
+    }
+  });
+
+  res.redirect("/");
+});
+
 app.post("/present", function(req, res){
   let subjectID = req.body.button;
 

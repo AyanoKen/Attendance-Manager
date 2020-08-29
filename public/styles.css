@@ -1,9 +1,11 @@
 body{
   background-color: #e3fdfd;
+  background-image: url("./images/black-thread-light.png");
 }
 
 #title{
   background-color: #a6e3e9;
+  background-image: url("./images/black-thread-light.png");
   padding: 5%;
 }
 
@@ -20,4 +22,23 @@ h3{
 
 .container{
   padding: 6%;
+}
+
+.addMore{
+  padding: 1% 6%;
+}
+
+.btn{
+  white-space: normal;
+}
+
+.footer{
+  background-color: #a6e3e9;
+  background-image: url("./images/black-thread-light.png");
+  padding: 1%;
+  text-align: center;
+}
+
+.footer p{
+  margin: 0;
 }
